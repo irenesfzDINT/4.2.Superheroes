@@ -5,8 +5,50 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Superheroes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Icon="assets/shield.ico"
+        Title="Superhéroes"
+        Height="450"
+        Width="800">
+    <Window.Resources>
+        <Style TargetType="Image">
+            <Setter Property="Width"
+                    Value="35"></Setter>
+        </Style>
+    </Window.Resources>
+    <DockPanel x:Name="ContenedorDockPanel">
+        <DockPanel DockPanel.Dock="Top"
+                   LastChildFill="False">
+            <TextBlock x:Name="NombreSHTextBlock"
+                       Text="si"
+                       DockPanel.Dock="Left"
+                       VerticalAlignment="Center">
+            </TextBlock>
+
+            <Image Source="assets/xmen.png"
+                   DockPanel.Dock="Right"></Image>
+            <Image Source="assets/avengers.png"
+                   DockPanel.Dock="Right"></Image>
+        </DockPanel>
+        <StackPanel DockPanel.Dock="Bottom"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            <Image Source="assets/arrow.png"></Image>
+            <TextBlock x:Name="NumeroPaginasTextBlock"
+                       Text="3/3"
+                       VerticalAlignment="Center"></TextBlock>
+            <Image Source="assets/arrow.png"
+                   RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform />
+                        <SkewTransform />
+                        <RotateTransform Angle="180" />
+                        <TranslateTransform />
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+        </StackPanel>
+        <Image x:Name="ImagenSHImage"
+               Stretch="Fill"></Image>
+    </DockPanel>
 </Window>

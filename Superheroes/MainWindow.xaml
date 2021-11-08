@@ -12,31 +12,51 @@
     <Window.Resources>
         <local:FondoBooleanConverter x:Key="ConverterFondo"></local:FondoBooleanConverter>
         <local:ImageVisibilityConverter x:Key="Visibility"></local:ImageVisibilityConverter>
+        <!--Todos los textos-->
+        <Style TargetType="TextBlock">
+            <Setter Property="FontWeight"
+                    Value="Bold"></Setter>
+            <Setter Property="VerticalAlignment"
+                    Value="Center"></Setter>
+            <Setter Property="Margin"
+                    Value="5"></Setter>
+        </Style>
+        <Style TargetType="Image">
+            <Setter Property="Margin"
+                    Value="5"></Setter>
+        </Style>
+        <!--Flechas abajo-->
         <Style TargetType="Image"
-               x:Key="iconos">
+               x:Key="boton">
             <Setter Property="Width"
                     Value="35"></Setter>
-            <Setter Property="Margin" Value="5"></Setter>
+            <Setter Property="Height"
+                    Value="45"></Setter>
+            <Setter Property="Margin"
+                    Value="5"></Setter>
+            <Setter Property="Source"
+                    Value="assets/arrow.png"></Setter>
+            <EventSetter Event="MouseLeftButtonUp"
+                         Handler="Image_MouseLeftButtonUp"></EventSetter>
         </Style>
     </Window.Resources>
     <Grid x:Name="ContenedorGrid"
           Background="{Binding Converter={StaticResource ConverterFondo}, Path=Heroe}">
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="60"></RowDefinition>
                 <RowDefinition></RowDefinition>
-                <RowDefinition Height="3*"></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
             </Grid.RowDefinitions>
 
             <DockPanel DockPanel.Dock="Top"
                        LastChildFill="False"
                        Grid.Row="0">
-                <TextBlock Margin="5" x:Name="NombreSHTextBlock"
+                <TextBlock x:Name="NombreSHTextBlock"
                            Text="{Binding Path=Nombre}"
                            DockPanel.Dock="Left"
                            Foreground="White"
-                           VerticalAlignment="Center"
-                           FontSize="44">
+                           FontSize="35">
                     <TextBlock.Effect>
                         <DropShadowEffect />
                     </TextBlock.Effect>
@@ -44,11 +64,9 @@
 
                 <Image x:Name="XMenImage"
                        Source="assets/xmen.png"
-                       Style="{StaticResource iconos}"
                        Visibility="{Binding Converter={StaticResource Visibility}, Path=Xmen}"
                        DockPanel.Dock="Right"></Image>
                 <Image x:Name="AvengersImage"
-                       Style="{StaticResource iconos}"
                        Source="assets/avengers.png"
                        Visibility="{Binding Converter={StaticResource Visibility}, Path=Vengador}"
                        DockPanel.Dock="Right"></Image>
@@ -57,21 +75,21 @@
                         DockPanel.Dock="Bottom"
                         Orientation="Horizontal"
                         HorizontalAlignment="Center">
-                <Image Source="assets/arrow.png"
-                       Style="{StaticResource iconos}"></Image>
+                <Image Style="{StaticResource boton}"
+                       Tag="Restar"></Image>
                 <TextBlock x:Name="NumeroPaginasTextBlock"
-                           Text="3/3"
-                           VerticalAlignment="Center"
-                           FontSize="30"
-                           FontWeight="Bold"></TextBlock>
-                <Image Source="assets/arrow.png"
-                       Style="{StaticResource iconos}"
+                           Text="1/3"
+                           FontSize="30"></TextBlock>
+                <Image Style="{StaticResource boton}"
+                       Tag="Sumar"
                        RenderTransformOrigin="0.5,0.5">
                     <Image.RenderTransform>
                         <TransformGroup>
-                            <ScaleTransform />
-                            <SkewTransform />
-                            <RotateTransform Angle="180" />
+                            <ScaleTransform ScaleY="1"
+                                            ScaleX="-1" />
+                            <SkewTransform AngleY="0"
+                                           AngleX="0" />
+                            <RotateTransform Angle="0" />
                             <TranslateTransform />
                         </TransformGroup>
                     </Image.RenderTransform>
@@ -79,8 +97,10 @@
             </StackPanel>
             <Image Grid.Row="1"
                    x:Name="ImagenSHImage"
+                   Margin="5"
                    Source="{Binding Path=Imagen}"
-                   Stretch="Fill"></Image>
+                   Stretch="UniformToFill">
+            </Image>
         </Grid>
     </Grid>
 </Window>

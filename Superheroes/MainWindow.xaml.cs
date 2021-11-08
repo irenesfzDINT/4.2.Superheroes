@@ -21,11 +21,30 @@ namespace Superheroes
     public partial class MainWindow : Window
     {
         List<Superheroe> superheroes = Superheroe.GetSamples();
+        int contadorHeroes;
         public MainWindow()
         {
             InitializeComponent();
+            contadorHeroes = 0;
+            ContenedorGrid.DataContext = superheroes[contadorHeroes];
+        }
 
-            ContenedorGrid.DataContext = superheroes[0];
+        private void Image_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if ((sender as Image).Tag.ToString() == "Sumar")
+            {
+                if (contadorHeroes < 2)
+                    contadorHeroes++;
+                else contadorHeroes = 0;
+            }
+            else
+            {
+                if (contadorHeroes != 0)
+                    contadorHeroes--;
+                else contadorHeroes = 2;
+            }
+            ContenedorGrid.DataContext = superheroes[contadorHeroes];
+            NumeroPaginasTextBlock.Text = contadorHeroes + 1 + "/3";
         }
     }
 }

@@ -10,45 +10,77 @@
         Height="450"
         Width="800">
     <Window.Resources>
-        <Style TargetType="Image">
+        <local:FondoBooleanConverter x:Key="ConverterFondo"></local:FondoBooleanConverter>
+        <local:ImageVisibilityConverter x:Key="Visibility"></local:ImageVisibilityConverter>
+        <Style TargetType="Image"
+               x:Key="iconos">
             <Setter Property="Width"
                     Value="35"></Setter>
+            <Setter Property="Margin" Value="5"></Setter>
         </Style>
     </Window.Resources>
-    <DockPanel x:Name="ContenedorDockPanel">
-        <DockPanel DockPanel.Dock="Top"
-                   LastChildFill="False">
-            <TextBlock x:Name="NombreSHTextBlock"
-                       Text="si"
-                       DockPanel.Dock="Left"
-                       VerticalAlignment="Center">
-            </TextBlock>
+    <Grid x:Name="ContenedorGrid"
+          Background="{Binding Converter={StaticResource ConverterFondo}, Path=Heroe}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
 
-            <Image Source="assets/xmen.png"
-                   DockPanel.Dock="Right"></Image>
-            <Image Source="assets/avengers.png"
-                   DockPanel.Dock="Right"></Image>
-        </DockPanel>
-        <StackPanel DockPanel.Dock="Bottom"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Center">
-            <Image Source="assets/arrow.png"></Image>
-            <TextBlock x:Name="NumeroPaginasTextBlock"
-                       Text="3/3"
-                       VerticalAlignment="Center"></TextBlock>
-            <Image Source="assets/arrow.png"
-                   RenderTransformOrigin="0.5,0.5">
-                <Image.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform />
-                        <SkewTransform />
-                        <RotateTransform Angle="180" />
-                        <TranslateTransform />
-                    </TransformGroup>
-                </Image.RenderTransform>
-            </Image>
-        </StackPanel>
-        <Image x:Name="ImagenSHImage"
-               Stretch="Fill"></Image>
-    </DockPanel>
+            <DockPanel DockPanel.Dock="Top"
+                       LastChildFill="False"
+                       Grid.Row="0">
+                <TextBlock Margin="5" x:Name="NombreSHTextBlock"
+                           Text="{Binding Path=Nombre}"
+                           DockPanel.Dock="Left"
+                           Foreground="White"
+                           VerticalAlignment="Center"
+                           FontSize="44">
+                    <TextBlock.Effect>
+                        <DropShadowEffect />
+                    </TextBlock.Effect>
+                </TextBlock>
+
+                <Image x:Name="XMenImage"
+                       Source="assets/xmen.png"
+                       Style="{StaticResource iconos}"
+                       Visibility="{Binding Converter={StaticResource Visibility}, Path=Xmen}"
+                       DockPanel.Dock="Right"></Image>
+                <Image x:Name="AvengersImage"
+                       Style="{StaticResource iconos}"
+                       Source="assets/avengers.png"
+                       Visibility="{Binding Converter={StaticResource Visibility}, Path=Vengador}"
+                       DockPanel.Dock="Right"></Image>
+            </DockPanel>
+            <StackPanel Grid.Row="2"
+                        DockPanel.Dock="Bottom"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <Image Source="assets/arrow.png"
+                       Style="{StaticResource iconos}"></Image>
+                <TextBlock x:Name="NumeroPaginasTextBlock"
+                           Text="3/3"
+                           VerticalAlignment="Center"
+                           FontSize="30"
+                           FontWeight="Bold"></TextBlock>
+                <Image Source="assets/arrow.png"
+                       Style="{StaticResource iconos}"
+                       RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform />
+                            <RotateTransform Angle="180" />
+                            <TranslateTransform />
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+            </StackPanel>
+            <Image Grid.Row="1"
+                   x:Name="ImagenSHImage"
+                   Source="{Binding Path=Imagen}"
+                   Stretch="Fill"></Image>
+        </Grid>
+    </Grid>
 </Window>

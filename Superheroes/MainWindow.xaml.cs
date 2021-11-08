@@ -20,10 +20,12 @@ namespace Superheroes
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        List<Superheroe> superheroes = Superheroe.GetSamples();
         public MainWindow()
         {
             InitializeComponent();
+
+            ContenedorGrid.DataContext = superheroes[0];
         }
     }
 }

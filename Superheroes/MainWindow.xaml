@@ -42,7 +42,7 @@
         </Style>
     </Window.Resources>
     <Grid x:Name="ContenedorGrid"
-          Background="{Binding Converter={StaticResource ConverterFondo}, Path=Heroe}">
+          Background="{Binding Converter={StaticResource ConverterFondo}, Path=SuperheroeActual.Heroe}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"></RowDefinition>
@@ -54,7 +54,7 @@
                        LastChildFill="False"
                        Grid.Row="0">
                 <TextBlock x:Name="NombreSHTextBlock"
-                           Text="{Binding Path=Nombre}"
+                           Text="{Binding Path=SuperheroeActual.Nombre}"
                            DockPanel.Dock="Left"
                            Foreground="White"
                            FontSize="35">
@@ -65,11 +65,11 @@
 
                 <Image x:Name="XMenImage"
                        Source="assets/xmen.png"
-                       Visibility="{Binding Converter={StaticResource Visibility}, Path=Xmen}"
+                       Visibility="{Binding Converter={StaticResource Visibility}, Path=SuperheroeActual.Xmen}"
                        DockPanel.Dock="Right"></Image>
                 <Image x:Name="AvengersImage"
                        Source="assets/avengers.png"
-                       Visibility="{Binding Converter={StaticResource Visibility}, Path=Vengador}"
+                       Visibility="{Binding Converter={StaticResource Visibility}, Path=SuperheroeActual.Vengador}"
                        DockPanel.Dock="Right"></Image>
             </DockPanel>
             <StackPanel Grid.Row="2"
@@ -78,8 +78,13 @@
                         HorizontalAlignment="Center">
                 <Image Style="{StaticResource boton}"
                        Tag="Restar"></Image>
-                <TextBlock x:Name="NumeroPaginasTextBlock"
-                           Text="1/3"
+                <TextBlock x:Name="ActualTextBlock"
+                           Text="{Binding Path=ContadorActual}"
+                           FontSize="30"></TextBlock>
+                <TextBlock Text="/"
+                           FontSize="30"></TextBlock>
+                <TextBlock x:Name="TotalTextBlock"
+                           Text="{Binding Path=TotalHeroes}"
                            FontSize="30"></TextBlock>
                 <Image Style="{StaticResource boton}"
                        Tag="Sumar"
@@ -99,7 +104,7 @@
             <Image Grid.Row="1"
                    x:Name="ImagenSHImage"
                    Margin="5"
-                   Source="{Binding Path=Imagen}"
+                   Source="{Binding Path=SuperheroeActual.Imagen}"
                    Stretch="UniformToFill">
             </Image>
         </Grid>

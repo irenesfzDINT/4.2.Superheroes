@@ -25,8 +25,7 @@ namespace Superheroes
         public MainWindow()
         {
             InitializeComponent();
-            contadorHeroes = 0;
-            ContenedorGrid.DataContext = superheroes[contadorHeroes];
+            ContenedorGrid.DataContext = superheroes.FirstOrDefault();
         }
 
         private void Image_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

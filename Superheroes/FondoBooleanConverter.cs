@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace Superheroes
 {
@@ -12,8 +13,9 @@ namespace Superheroes
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((bool)value) return "PaleGreen";
-            else return "IndianRed";
+            return ((bool)value) ? Brushes.PaleGreen : Brushes.IndianRed;
+            /*if ((bool)value) return "PaleGreen";
+            else return "IndianRed";*/
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -26,6 +26,28 @@
             <Setter Property="Margin"
                     Value="5"></Setter>
         </Style>
+        <Style TargetType="{x:Type Image}"
+               x:Key="SuperheroesImagen">
+            <Setter Property="Opacity"
+                    Value="0.5"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="Opacity"
+                            Value="1"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <!--Border-->
+        <Style TargetType="Border">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=ImagenSHImage, Path=IsMouseOver}"
+                             Value="True">
+                    <Setter Property="BorderThickness"
+                            Value="3"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
         <!--Flechas abajo-->
         <Style TargetType="Image"
                x:Key="boton">
@@ -101,12 +123,14 @@
                     </Image.RenderTransform>
                 </Image>
             </StackPanel>
-            <Image Grid.Row="1"
-                   x:Name="ImagenSHImage"
-                   Margin="5"
-                   Source="{Binding Path=SuperheroeActual.Imagen}"
-                   Stretch="UniformToFill">
-            </Image>
+            <Border BorderBrush="Black"
+                    Grid.Row="1" Margin="5">
+                <Image Style="{StaticResource SuperheroesImagen}"
+                       x:Name="ImagenSHImage"
+                       Source="{Binding Path=SuperheroeActual.Imagen}"
+                       Stretch="UniformToFill">
+                </Image>
+            </Border>
         </Grid>
     </Grid>
 </Window>

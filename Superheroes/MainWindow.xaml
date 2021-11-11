@@ -38,6 +38,14 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <!--Iconos-->
+        <Style TargetType="{x:Type Image}"
+               x:Key="iconos">
+            <Setter Property="Height"
+                    Value="50"></Setter>
+            <Setter Property="Margin"
+                    Value="5"></Setter>
+        </Style>
         <!--Border-->
         <Style TargetType="Border">
             <Style.Triggers>
@@ -62,40 +70,63 @@
             <EventSetter Event="MouseLeftButtonUp"
                          Handler="Image_MouseLeftButtonUp"></EventSetter>
         </Style>
+        <!--Nombre superheroe textblock-->
+        <Style TargetType="{x:Type TextBlock}"
+               x:Key="NombreSuperheroe"
+               BasedOn="{StaticResource {x:Type TextBlock}}">
+            <Setter Property="Foreground"
+                    Value="White"></Setter>
+            <Setter Property="FontSize"
+                    Value="35"></Setter>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="FontSize"
+                                             To="60"
+                                             Duration="0:0:2"></DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="FontSize"
+                                             To="35"
+                                             Duration="0:0:2"></DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+
+        </Style>
     </Window.Resources>
     <Grid x:Name="ContenedorGrid"
           Background="{Binding Converter={StaticResource ConverterFondo}, Path=SuperheroeActual.Heroe}">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="60"></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition Height="40"></RowDefinition>
-            </Grid.RowDefinitions>
-
+        <DockPanel>
             <DockPanel DockPanel.Dock="Top"
-                       LastChildFill="False"
-                       Grid.Row="0">
+                       LastChildFill="False">
                 <TextBlock x:Name="NombreSHTextBlock"
+                           Style="{StaticResource NombreSuperheroe}"
                            Text="{Binding Path=SuperheroeActual.Nombre}"
-                           DockPanel.Dock="Left"
-                           Foreground="White"
-                           FontSize="35">
+                           DockPanel.Dock="Left">
                     <TextBlock.Effect>
                         <DropShadowEffect />
                     </TextBlock.Effect>
                 </TextBlock>
 
                 <Image x:Name="XMenImage"
+                       Style="{StaticResource iconos}"
                        Source="assets/xmen.png"
                        Visibility="{Binding Converter={StaticResource Visibility}, Path=SuperheroeActual.Xmen}"
                        DockPanel.Dock="Right"></Image>
                 <Image x:Name="AvengersImage"
+                       Style="{StaticResource iconos}"
                        Source="assets/avengers.png"
                        Visibility="{Binding Converter={StaticResource Visibility}, Path=SuperheroeActual.Vengador}"
                        DockPanel.Dock="Right"></Image>
             </DockPanel>
-            <StackPanel Grid.Row="2"
-                        DockPanel.Dock="Bottom"
+            <StackPanel DockPanel.Dock="Bottom"
                         Orientation="Horizontal"
                         HorizontalAlignment="Center">
                 <Image Style="{StaticResource boton}"
@@ -124,13 +155,13 @@
                 </Image>
             </StackPanel>
             <Border BorderBrush="Black"
-                    Grid.Row="1" Margin="5">
+                    Margin="5">
                 <Image Style="{StaticResource SuperheroesImagen}"
                        x:Name="ImagenSHImage"
                        Source="{Binding Path=SuperheroeActual.Imagen}"
                        Stretch="UniformToFill">
                 </Image>
             </Border>
-        </Grid>
+        </DockPanel>
     </Grid>
 </Window>

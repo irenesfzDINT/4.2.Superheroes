@@ -7,8 +7,10 @@
         mc:Ignorable="d"
         Icon="assets/shield.ico"
         Title="Superhéroes"
-        Height="450"
-        Width="800">
+        MinHeight="450"
+        MinWidth="600"
+        Height="678"
+        Width="1013">
     <Window.Resources>
         <local:FondoBooleanConverter x:Key="ConverterFondo"></local:FondoBooleanConverter>
         <local:ImageVisibilityConverter x:Key="Visibility"></local:ImageVisibilityConverter>
@@ -45,6 +47,32 @@
                     Value="50"></Setter>
             <Setter Property="Margin"
                     Value="5"></Setter>
+            <Setter Property="Visibility"
+                    Value="Collapsed"></Setter>
+        </Style>
+        <!--Icono XMEN-->
+        <Style TargetType="{x:Type Image}"
+               x:Key="iconoXmen"
+               BasedOn="{StaticResource iconos}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=SuperheroeActual.Xmen}"
+                             Value="True">
+                    <Setter Property="Visibility"
+                            Value="Visible"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <!--Icono Vengador-->
+        <Style TargetType="{x:Type Image}"
+               x:Key="iconoVengador"
+               BasedOn="{StaticResource iconos}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=SuperheroeActual.Vengador}"
+                             Value="True">
+                    <Setter Property="Visibility"
+                            Value="Visible"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
         <!--Border-->
         <Style TargetType="Border">
@@ -98,11 +126,26 @@
                     </BeginStoryboard>
                 </EventTrigger>
             </Style.Triggers>
-
+        </Style>
+        <Style TargetType="{x:Type Grid}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=SuperheroeActual.Heroe}"
+                             Value="True">
+                    <Setter Property="Background"
+                            Value="PaleGreen"></Setter>
+                </DataTrigger>
+                <DataTrigger  Binding="{Binding Path=SuperheroeActual.Heroe}"
+                              Value="False">
+                    <Setter Property="Background"
+                            Value="IndianRed"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Grid x:Name="ContenedorGrid"
-          Background="{Binding Converter={StaticResource ConverterFondo}, Path=SuperheroeActual.Heroe}">
+    <!-- Esto es con converter:
+    Background="{Binding Converter={StaticResource ConverterFondo}, Path=SuperheroeActual.Heroe}"
+    -->
+    <Grid x:Name="ContenedorGrid">
         <DockPanel>
             <DockPanel DockPanel.Dock="Top"
                        LastChildFill="False">
@@ -116,14 +159,15 @@
                 </TextBlock>
 
                 <Image x:Name="XMenImage"
-                       Style="{StaticResource iconos}"
+                       Style="{StaticResource iconoXmen}"
                        Source="assets/xmen.png"
-                       Visibility="{Binding Converter={StaticResource Visibility}, Path=SuperheroeActual.Xmen}"
                        DockPanel.Dock="Right"></Image>
+                <!--Esto sería visibilidad con converter
+                Visibility="{Binding Converter={StaticResource Visibility}, Path=SuperheroeActual.Vengador}"
+                -->
                 <Image x:Name="AvengersImage"
-                       Style="{StaticResource iconos}"
+                       Style="{StaticResource iconoVengador}"
                        Source="assets/avengers.png"
-                       Visibility="{Binding Converter={StaticResource Visibility}, Path=SuperheroeActual.Vengador}"
                        DockPanel.Dock="Right"></Image>
             </DockPanel>
             <StackPanel DockPanel.Dock="Bottom"

@@ -46,7 +46,7 @@ namespace Superheroes
             }
         }
 
-        private List<Superheroe> lista = Superheroe.GetSamples();
+        private readonly List<Superheroe> lista = Superheroe.GetSamples();
         public MainWindowVM()
         {
             SuperheroeActual = lista.FirstOrDefault();

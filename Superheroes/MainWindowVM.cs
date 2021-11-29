@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Superheroes
 {
-    class MainWindowVM : INotifyPropertyChanged
+    class MainWindowVM : ObservableObject
     {
         //prop propfull
         private Superheroe superheroeActual;
@@ -17,8 +18,7 @@ namespace Superheroes
             get { return superheroeActual; }
             set
             {
-                superheroeActual = value;
-                NotifyPropertyChanged("SuperheroeActual");
+                SetProperty(ref superheroeActual, value);
             }
         }
 
@@ -29,8 +29,7 @@ namespace Superheroes
             get { return contadorActual; }
             set
             {
-                contadorActual = value;
-                NotifyPropertyChanged("ContadorActual");
+                SetProperty(ref contadorActual, value);
             }
         }
 
@@ -41,8 +40,7 @@ namespace Superheroes
             get { return totalHeroes; }
             set
             {
-                totalHeroes = value;
-                NotifyPropertyChanged("TotalHeroes");
+                SetProperty(ref totalHeroes, value);
             }
         }
 
@@ -71,10 +69,6 @@ namespace Superheroes
                 SuperheroeActual = lista[ContadorActual - 1];
             }
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void NotifyPropertyChanged(string propertyName)
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+
     }
 }
